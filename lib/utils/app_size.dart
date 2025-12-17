@@ -4,8 +4,8 @@ class AppSize {
   AppSize._();
   static late Size size;
 
-  static const double _xdHeight = 882;
-  static const double _xdWidth = 375;
+  static const double _xdHeight = 800;
+  static const double _xdWidth = 360;
 
   static double height({required num value}) {
     double percentage = (value / _xdHeight * 100).roundToDouble() / 100;
