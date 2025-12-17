@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scube_task_app/constant/app_strings.dart';
+import 'package:scube_task_app/routes/app_routes.dart';
 
 class LoginScreenController extends GetxController {
   final TextEditingController usernameController = TextEditingController();
@@ -50,6 +51,8 @@ class LoginScreenController extends GetxController {
       final password = passwordController.text.trim();
 
       if (username.isNotEmpty && password.isNotEmpty) {
+        
+        Get.offAllNamed(AppRoutes.instance.dashboardScreen);
         Get.snackbar(
           'Success',
           'Login successful!',

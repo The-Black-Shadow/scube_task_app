@@ -69,4 +69,47 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.instance.white,
   );
+
+  // Dashboard Styles
+  TextStyle get dashboardHeaderTitle => GoogleFonts.inter(
+    fontSize: AppSize.width(value: 16),
+    fontWeight: FontWeight.w500,
+    color: AppColors.instance.textDarkBlue,
+  );
+
+  TextStyle get dashboardCardTitle => GoogleFonts.inter(
+    fontSize: AppSize.width(value: 14),
+    fontWeight: FontWeight.w500,
+    color: AppColors.instance.textDark,
+  );
+
+  TextStyle get dashboardDataLabel => GoogleFonts.inter(
+    fontSize: AppSize.width(value: 12),
+    fontWeight: FontWeight.w400,
+    color: AppColors.instance.textGrey,
+  );
+
+  TextStyle get dashboardDataValue => GoogleFonts.inter(
+    fontSize: AppSize.width(value: 12),
+    fontWeight: FontWeight.w400,
+    color: AppColors.instance.textDark,
+  );
+
+  TextStyle get powerValue => GoogleFonts.inter(
+    fontSize: AppSize.width(value: 16),
+    fontWeight: FontWeight.w600,
+    color: AppColors.instance.textDark,
+  );
+
+  TextStyle get powerUnit => GoogleFonts.inter(
+    fontSize: AppSize.width(value: 14),
+    fontWeight: FontWeight.w600,
+    color: AppColors.instance.textDark,
+  );
+
+  TextStyle get gridButtonText => GoogleFonts.inter(
+    fontSize: AppSize.width(value: 14),
+    fontWeight: FontWeight.w600,
+    color: AppColors.instance.textGrey,
+  );
 }
