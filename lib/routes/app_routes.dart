@@ -4,4 +4,5 @@ class AppRoutes {
   static AppRoutes get instance => _instance;
   // final String initial = "/";
   final String loginScreen = "/loginScreen";
+  final String dashboardScreen = "/dashboardScreen";
 }

@@ -19,4 +19,19 @@ class AppStrings {
   final String usernameRequired = 'Username is required';
   final String passwordRequired = 'Password is required';
   final String invalidCredentials = 'Invalid username or password';
+  // Dashboard
+  final String scmTitle = 'SCM';
+  final String tabSummary = 'Summary';
+  final String tabSld = 'SLD';
+  final String tabData = 'Data';
+  final String electricitySection = 'Electricity';
+  final String toggleSource = 'Source';
+  final String toggleLoad = 'Load';
+  final String analysisPro = 'Analysis Pro';
+  final String gGenerator = 'G. Generator';
+  final String plantSummary = 'Plant Summary';
+  final String naturalGas = 'Natural Gas';
+  final String dGenerator = 'D. Generator';
+  final String waterProcess = 'Water Process';
+  final String totalPower = 'Total Power';
 }

@@ -1,0 +1,50 @@
+{
+    "totalPower": 5.53,
+    "unit": "kw",
+    "dataList": [
+        {
+            "id": 1,
+            "title": "Data View",
+            "status": "Active",
+            "statusColor": "blue",
+            "icon": "solar-cell_5575136 1.png",
+            "data1Label": "Data 1",
+            "data1Value": "55505.63",
+            "data2Label": "Data 2",
+            "data2Value": "58805.63"
+        },
+        {
+            "id": 2,
+            "title": "Data Type 2",
+            "status": "Active",
+            "statusColor": "orange",
+            "icon": "battery.png",
+            "data1Label": "Data 1",
+            "data1Value": "55505.63",
+            "data2Label": "Data 2",
+            "data2Value": "58805.63"
+        },
+        {
+            "id": 3,
+            "title": "Data Type 3",
+            "status": "Inactive",
+            "statusColor": "red",
+            "icon": "power_15679163 1.png",
+            "data1Label": "Data 1",
+            "data1Value": "55505.63",
+            "data2Label": "Data 2",
+            "data2Value": "58805.63"
+        },
+        {
+            "id": 4,
+            "title": "Total Solar",
+            "status": "Active",
+            "statusColor": "blue",
+            "icon": "solar-cell_5575136 1.png",
+            "data1Label": "Live Power",
+            "data1Value": "55505.63 kW",
+            "data2Label": "Total Energy",
+            "data2Value": "58805.63 kWh"
+        }
+    ]
+}
