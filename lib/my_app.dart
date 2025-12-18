@@ -15,6 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.instance.lightTheme,
       getPages: appRootRoutesFile,
+      defaultTransition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 200),
       initialRoute: AppRoutes.instance.loginScreen,
       builder: (context, child) {
         AppSize.size = MediaQuery.of(context).size;
