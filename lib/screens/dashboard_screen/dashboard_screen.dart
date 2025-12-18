@@ -15,8 +15,6 @@ class DashboardScreen extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => DashboardController());
-
     return Scaffold(
       backgroundColor: AppColors.instance.backgroundColor,
       body: Column(

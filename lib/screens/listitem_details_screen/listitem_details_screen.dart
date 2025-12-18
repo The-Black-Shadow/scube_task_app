@@ -17,8 +17,6 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ListItemDetailsController());
-
     return Scaffold(
       backgroundColor: AppColors.instance.backgroundColor,
       body: Column(
