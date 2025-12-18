@@ -57,6 +57,7 @@ class DashboardListSection extends GetView<DashboardController> {
             ),
           );
         }),
+        SizedBox(height: AppSize.height(value: 5)),
       ],
     );
   }
