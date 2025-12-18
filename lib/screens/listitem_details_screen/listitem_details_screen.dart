@@ -72,6 +72,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                       startAngle: isDataView ? 135 : 0,
                       sweepAngle: isDataView ? 270 : 360,
                       trackColor: AppColors.instance.chartBlue.withOpacity(0.1),
+                      precision: isDataView ? 2 : 0,
                     );
                   }),
                   SizedBox(height: AppSize.height(value: 24)),
