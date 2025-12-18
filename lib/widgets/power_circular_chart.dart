@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:scube_task_app/constant/app_colors.dart';
 import 'package:scube_task_app/constant/app_text_styles.dart';
@@ -7,12 +9,22 @@ class PowerCircularChart extends StatelessWidget {
   final double value;
   final String unit;
   final String? label;
+  final double max;
+  final double startAngle;
+  final double sweepAngle;
+  final Color? color;
+  final Color? trackColor;
 
   const PowerCircularChart({
     super.key,
     required this.value,
     required this.unit,
     this.label,
+    this.max = 100.0,
+    this.startAngle = 0,
+    this.sweepAngle = 360,
+    this.color,
+    this.trackColor,
   });
 
   @override
@@ -20,38 +32,18 @@ class PowerCircularChart extends StatelessWidget {
     return SizedBox(
       width: AppSize.width(value: 180),
       height: AppSize.width(value: 180),
-      // Use CustomPaint for drawing the circular chart or simple Stack with CircularProgressIndicator
-      // Here using a simple Stack with a thick CircularProgressIndicator for simplicity as per requirement
-      // to "look exactly like image" which is a single color ring.
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Background Circle used for border/shadow if needed - using simple white container behind
-          Container(
-            width: AppSize.width(value: 160),
-            height: AppSize.width(value: 160),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.instance.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 10,
-                  spreadRadius: 2,
-                ),
-              ],
-            ),
-          ),
-          // The Blue Ring
-          SizedBox(
-            width: AppSize.width(value: 140),
-            height: AppSize.width(value: 140),
-            child: CircularProgressIndicator(
-              value: 1.0, // Full circle
-              strokeWidth: AppSize.width(value: 20),
-              valueColor: AlwaysStoppedAnimation<Color>(
-                AppColors.instance.chartBlue,
-              ),
+          CustomPaint(
+            size: Size(AppSize.width(value: 140), AppSize.width(value: 140)),
+            painter: _PowerCircularChartPainter(
+              value: value,
+              max: max,
+              startAngle: startAngle,
+              sweepAngle: sweepAngle,
+              color: color ?? AppColors.instance.chartBlue,
+              trackColor: trackColor ?? AppColors.instance.white,
             ),
           ),
           // Center Text
@@ -60,14 +52,17 @@ class PowerCircularChart extends StatelessWidget {
             children: [
               if (label != null) // Only show if label is provided
                 Text(label!, style: AppTextStyles.instance.dashboardDataLabel),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
-                  Text("$value", style: AppTextStyles.instance.powerValue),
-                  SizedBox(width: 2),
+                  Text(
+                    value.toStringAsFixed(2),
+                    style: AppTextStyles.instance.powerValue,
+                  ),
+                  const SizedBox(width: 2),
                   Text(unit, style: AppTextStyles.instance.powerUnit),
                 ],
               ),
@@ -76,5 +71,80 @@ class PowerCircularChart extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class _PowerCircularChartPainter extends CustomPainter {
+  final double value;
+  final double max;
+  final double startAngle;
+  final double sweepAngle;
+  final Color color;
+  final Color trackColor;
+
+  _PowerCircularChartPainter({
+    required this.value,
+    required this.max,
+    required this.startAngle,
+    required this.sweepAngle,
+    required this.color,
+    required this.trackColor,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = (size.width / 2);
+
+    // Stroke width
+    final strokeWidth = AppSize.width(value: 20);
+
+    final trackPaint = Paint()
+      ..color = trackColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round;
+
+    final valuePaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round;
+
+    // Convert degrees to radians
+    final startRad = startAngle * (math.pi / 180);
+    final sweepRad = sweepAngle * (math.pi / 180);
+
+    // Draw Track (Background)
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      startRad,
+      sweepRad,
+      false,
+      trackPaint,
+    );
+
+    // Calculate value sweep
+    final clampedValue = value.clamp(0.0, max);
+    final valueSweepRad = (clampedValue / max) * sweepRad;
+
+    // Draw Value (Foreground)
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      startRad,
+      valueSweepRad,
+      false,
+      valuePaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _PowerCircularChartPainter oldDelegate) {
+    return oldDelegate.value != value ||
+        oldDelegate.max != max ||
+        oldDelegate.startAngle != startAngle ||
+        oldDelegate.sweepAngle != sweepAngle ||
+        oldDelegate.color != color ||
+        oldDelegate.trackColor != trackColor;
   }
 }
