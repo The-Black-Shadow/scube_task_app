@@ -30,12 +30,10 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
             child: RefreshIndicator(
               onRefresh: controller.fetchData,
               child: SingleChildScrollView(
-                physics:
-                    const AlwaysScrollableScrollPhysics(), 
+                physics: const AlwaysScrollableScrollPhysics(),
                 padding: EdgeInsets.all(AppSize.width(value: 20)),
                 child: Column(
                   children: [
-                    
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.symmetric(
@@ -69,13 +67,14 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                     ),
                     SizedBox(height: AppSize.height(value: 24)),
 
-                    
                     Obx(() {
                       if (controller.isLoading.value) {
                         return SkeletonWidget(
-                          width: AppSize.width(value: 180),
-                          height: AppSize.width(value: 180),
-                          borderRadius: BorderRadius.circular(90),
+                          width: AppSize.width(value: 150),
+                          height: AppSize.width(value: 150),
+                          borderRadius: BorderRadius.circular(
+                            AppSize.width(value: 75),
+                          ),
                         );
                       }
 
@@ -84,8 +83,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                         value: isDataView ? 55.00 : 8897455,
                         unit: isDataView ? AppStrings.instance.kwhSqft : 'tk',
                         label: '',
-                        max:
-                            100, 
+                        max: 100,
                         startAngle: isDataView ? 135 : 0,
                         sweepAngle: isDataView ? 270 : 360,
                         trackColor: AppColors.instance.chartBlue.withOpacity(
@@ -116,7 +114,6 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
   Widget _buildDataView(BuildContext context) {
     return Column(
       children: [
-        
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -180,7 +177,6 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
           return const SizedBox.shrink();
         }),
 
-        
         Container(
           width: double.infinity,
           padding: EdgeInsets.all(AppSize.width(value: 12)),
@@ -435,7 +431,6 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
   Widget _buildListSkeleton() {
     return Column(
       children: [
-        
         SkeletonWidget(
           width: double.infinity,
           height: AppSize.height(value: 50),
@@ -443,14 +438,16 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
         ),
         SizedBox(height: AppSize.height(value: 12)),
 
-        
         ...List.generate(
           4,
           (index) => Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: AppSize.width(value: 12),
+            ),
             child: SkeletonWidget(
               width: double.infinity,
-              height: AppSize.height(value: 80),
+              height: AppSize.height(value: 70), // Reduced size
               borderRadius: BorderRadius.circular(8),
             ),
           ),

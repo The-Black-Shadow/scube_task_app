@@ -32,7 +32,6 @@ class ListItemDetailsController extends GetxController {
   Future<void> fetchData() async {
     isLoading.value = true;
     try {
-      await Future.delayed(const Duration(seconds: 1));
       final result = await _repository.fetchDashboardData();
 
       if (result.dataList != null) {

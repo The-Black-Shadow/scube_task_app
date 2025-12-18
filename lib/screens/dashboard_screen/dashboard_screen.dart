@@ -13,6 +13,7 @@ import 'package:scube_task_app/widgets/dashboard_grid_item.dart';
 import 'package:scube_task_app/widgets/dashboard_header.dart';
 import 'package:scube_task_app/widgets/dashboard_list_card.dart';
 import 'package:scube_task_app/widgets/power_circular_chart.dart';
+import 'package:scube_task_app/widgets/skeleton_widget.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({super.key});
@@ -25,10 +26,9 @@ class DashboardScreen extends GetView<DashboardController> {
       backgroundColor: AppColors.instance.backgroundColor,
       body: Column(
         children: [
-          
           DashboardHeader(title: AppStrings.instance.scmTitle),
           SizedBox(height: AppSize.height(value: 15)),
-          
+
           Expanded(
             child: RefreshIndicator(
               onRefresh: controller.fetchData,
@@ -57,10 +57,9 @@ class DashboardScreen extends GetView<DashboardController> {
                               padding: EdgeInsets.all(AppSize.width(value: 12)),
                               child: Column(
                                 children: [
-                                  
                                   _buildTabBar(),
                                   SizedBox(height: AppSize.height(value: 10)),
-                                  
+
                                   Text(
                                     AppStrings.instance.electricitySection,
                                     style: AppTextStyles
@@ -74,10 +73,16 @@ class DashboardScreen extends GetView<DashboardController> {
                                   ),
                                   Divider(color: AppColors.instance.borderGrey),
                                   SizedBox(height: AppSize.height(value: 8)),
-                                  
+
                                   Obx(() {
                                     if (controller.isLoading.value) {
-                                      return const CircularProgressIndicator();
+                                      return SkeletonWidget(
+                                        width: AppSize.width(value: 150),
+                                        height: AppSize.width(value: 150),
+                                        borderRadius: BorderRadius.circular(
+                                          AppSize.width(value: 75),
+                                        ),
+                                      );
                                     }
                                     final data = controller.dashboardData.value;
                                     return PowerCircularChart(
@@ -88,7 +93,7 @@ class DashboardScreen extends GetView<DashboardController> {
                                     );
                                   }),
                                   SizedBox(height: AppSize.height(value: 10)),
-                                  
+
                                   Obx(
                                     () => CustomToggleButton(
                                       isSourceSelected:
@@ -100,7 +105,6 @@ class DashboardScreen extends GetView<DashboardController> {
                               ),
                             ),
 
-                            
                             Padding(
                               padding: EdgeInsets.symmetric(
                                 horizontal: AppSize.width(value: 12),
@@ -111,18 +115,36 @@ class DashboardScreen extends GetView<DashboardController> {
                               ),
                             ),
 
-                            
                             Obx(() {
                               if (controller.isLoading.value) {
-                                return const SizedBox.shrink();
+                                return Padding(
+                                  padding: EdgeInsets.all(
+                                    AppSize.width(value: 12),
+                                  ),
+                                  child: Column(
+                                    children: List.generate(
+                                      3,
+                                      (index) => Padding(
+                                        padding: EdgeInsets.only(
+                                          bottom: AppSize.height(value: 10),
+                                        ),
+                                        child: SkeletonWidget(
+                                          width: double.infinity,
+                                          height: AppSize.height(value: 70),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
                               }
                               final list =
                                   controller.dashboardData.value?.dataList ??
                                   [];
                               return SizedBox(
-                                height: AppSize.height(
-                                  value: 300,
-                                ), 
+                                height: AppSize.height(value: 300),
                                 child: ListView.separated(
                                   padding: EdgeInsets.all(
                                     AppSize.width(value: 12),
@@ -150,7 +172,7 @@ class DashboardScreen extends GetView<DashboardController> {
                         ),
                       ),
                       SizedBox(height: AppSize.height(value: 24)),
-                      
+
                       _buildBottomGrid(),
                       SizedBox(height: AppSize.height(value: 30)),
                     ],
