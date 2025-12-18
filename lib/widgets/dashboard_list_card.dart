@@ -39,7 +39,7 @@ class DashboardExpandedList extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: AppSize.height(value: 2)),
       decoration: BoxDecoration(
-        color: AppColors.instance.listBackground, // Default white bg
+        color: AppColors.instance.listBackground,
         borderRadius: BorderRadius.circular(AppSize.width(value: 8)),
         border: Border.all(color: AppColors.instance.borderGrey),
       ),
@@ -146,7 +146,6 @@ class DashboardExpandedList extends StatelessWidget {
 
   String _getIconPath(String? iconName) {
     if (iconName == null) return AppAssertImage.instance.noData;
-    // Basic mapping, in real app might be direct path
     return "assets/$iconName";
   }
 }

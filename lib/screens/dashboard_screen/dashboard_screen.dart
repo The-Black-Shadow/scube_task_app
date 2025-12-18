@@ -25,10 +25,10 @@ class DashboardScreen extends GetView<DashboardController> {
       backgroundColor: AppColors.instance.backgroundColor,
       body: Column(
         children: [
-          // Header
+          
           DashboardHeader(title: AppStrings.instance.scmTitle),
           SizedBox(height: AppSize.height(value: 15)),
-          // Body
+          
           Expanded(
             child: RefreshIndicator(
               onRefresh: controller.fetchData,
@@ -57,10 +57,10 @@ class DashboardScreen extends GetView<DashboardController> {
                               padding: EdgeInsets.all(AppSize.width(value: 12)),
                               child: Column(
                                 children: [
-                                  // Custom Tab Bar (Summary, SLD, Data)
+                                  
                                   _buildTabBar(),
                                   SizedBox(height: AppSize.height(value: 10)),
-                                  // Section Title
+                                  
                                   Text(
                                     AppStrings.instance.electricitySection,
                                     style: AppTextStyles
@@ -74,7 +74,7 @@ class DashboardScreen extends GetView<DashboardController> {
                                   ),
                                   Divider(color: AppColors.instance.borderGrey),
                                   SizedBox(height: AppSize.height(value: 8)),
-                                  // Circular Chart
+                                  
                                   Obx(() {
                                     if (controller.isLoading.value) {
                                       return const CircularProgressIndicator();
@@ -88,7 +88,7 @@ class DashboardScreen extends GetView<DashboardController> {
                                     );
                                   }),
                                   SizedBox(height: AppSize.height(value: 10)),
-                                  // Toggle Button
+                                  
                                   Obx(
                                     () => CustomToggleButton(
                                       isSourceSelected:
@@ -100,7 +100,7 @@ class DashboardScreen extends GetView<DashboardController> {
                               ),
                             ),
 
-                            // Separator
+                            
                             Padding(
                               padding: EdgeInsets.symmetric(
                                 horizontal: AppSize.width(value: 12),
@@ -111,7 +111,7 @@ class DashboardScreen extends GetView<DashboardController> {
                               ),
                             ),
 
-                            // Scrollable List Items
+                            
                             Obx(() {
                               if (controller.isLoading.value) {
                                 return const SizedBox.shrink();
@@ -122,7 +122,7 @@ class DashboardScreen extends GetView<DashboardController> {
                               return SizedBox(
                                 height: AppSize.height(
                                   value: 300,
-                                ), // Fixed height for scrolling
+                                ), 
                                 child: ListView.separated(
                                   padding: EdgeInsets.all(
                                     AppSize.width(value: 12),
@@ -150,7 +150,7 @@ class DashboardScreen extends GetView<DashboardController> {
                         ),
                       ),
                       SizedBox(height: AppSize.height(value: 24)),
-                      // Bottom Grid Menu
+                      
                       _buildBottomGrid(),
                       SizedBox(height: AppSize.height(value: 30)),
                     ],
