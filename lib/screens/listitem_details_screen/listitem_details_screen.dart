@@ -66,12 +66,16 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                     return PowerCircularChart(
                       value: isDataView ? 55.00 : 8897455,
                       unit: isDataView ? AppStrings.instance.kwhSqft : 'tk',
-                      label: '', 
+                      label: '',
+                      max:
+                          100, // Assuming 100 is max for percentage or similar scaling
+                      startAngle: isDataView ? 135 : 0,
+                      sweepAngle: isDataView ? 270 : 360,
+                      trackColor: AppColors.instance.chartBlue.withOpacity(0.1),
                     );
                   }),
                   SizedBox(height: AppSize.height(value: 24)),
 
-                  
                   Obx(
                     () => controller.viewType.value == 0
                         ? _buildDataView(context)
@@ -172,7 +176,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                     style: GoogleFonts.inter(
                       fontSize: AppSize.width(value: 16),
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFF1E2843), 
+                      color: const Color(0xFF1E2843),
                     ),
                   ),
                   Text(
@@ -213,10 +217,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
               children: [
                 Row(
                   children: [
-                    Icon(
-                      Icons.bar_chart,
-                      color: AppColors.instance.textGrey,
-                    ), 
+                    Icon(Icons.bar_chart, color: AppColors.instance.textGrey),
                     SizedBox(width: 8),
                     Text(
                       AppStrings.instance.dataAndCostInfo,

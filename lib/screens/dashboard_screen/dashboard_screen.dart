@@ -81,6 +81,8 @@ class DashboardScreen extends GetView<DashboardController> {
                                     }
                                     final data = controller.dashboardData.value;
                                     return PowerCircularChart(
+                                      trackColor: AppColors.instance.chartBlue,
+                                      label: AppStrings.instance.totalPower,
                                       value: data?.totalPower ?? 0.0,
                                       unit: data?.unit ?? 'kw',
                                     );
