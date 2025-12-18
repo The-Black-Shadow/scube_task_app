@@ -34,4 +34,5 @@ class AppStrings {
   final String dGenerator = 'D. Generator';
   final String waterProcess = 'Water Process';
   final String totalPower = 'Total Power';
+  final String noDataMessage = 'No data is here,\nplease wait.';
 }
