@@ -70,4 +70,12 @@ class ListItemDetailsController extends GetxController {
   void setDateType(int type) {
     dateType.value = type;
   }
+
+  void setFromDate(DateTime date) {
+    fromDate.value = date;
+  }
+
+  void setToDate(DateTime date) {
+    toDate.value = date;
+  }
 }
