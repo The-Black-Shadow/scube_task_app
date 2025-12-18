@@ -147,6 +147,18 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                       context,
                       AppStrings.instance.fromDate,
                       controller.fromDate.value,
+                      onTap: () async {
+                        final date = await showDatePicker(
+                          context: context,
+                          initialDate: controller.fromDate.value,
+                          firstDate: DateTime(2000),
+                          lastDate:
+                              controller.toDate.value, // Constrain to End Date
+                        );
+                        if (date != null) {
+                          controller.setFromDate(date);
+                        }
+                      },
                     ),
                   ),
                   SizedBox(width: 8),
@@ -155,6 +167,19 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                       context,
                       AppStrings.instance.toDate,
                       controller.toDate.value,
+                      onTap: () async {
+                        final date = await showDatePicker(
+                          context: context,
+                          initialDate: controller.toDate.value,
+                          firstDate: controller
+                              .fromDate
+                              .value, // Constrain to Start Date
+                          lastDate: DateTime.now(),
+                        );
+                        if (date != null) {
+                          controller.setToDate(date);
+                        }
+                      },
                     ),
                   ),
                   SizedBox(width: 8),
@@ -292,27 +317,40 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
     );
   }
 
-  Widget _buildDatePicker(BuildContext context, String hint, DateTime date) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.instance.textGrey.withOpacity(0.5)),
-        borderRadius: BorderRadius.circular(8),
-        color: AppColors.instance.white,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            hint,
-            style: TextStyle(color: AppColors.instance.textGrey, fontSize: 13),
+  Widget _buildDatePicker(
+    BuildContext context,
+    String hint,
+    DateTime date, {
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: AppColors.instance.textGrey.withOpacity(0.5),
           ),
-          Icon(
-            Icons.calendar_today_outlined,
-            size: 16,
-            color: AppColors.instance.textGrey,
-          ),
-        ],
+          borderRadius: BorderRadius.circular(8),
+          color: AppColors.instance.white,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              DateFormat('dd/MM/yyyy').format(date),
+              style: TextStyle(
+                color: AppColors.instance.textGrey,
+                fontSize: 13,
+              ),
+            ),
+            Icon(
+              Icons.calendar_today_outlined,
+              size: 16,
+              color: AppColors.instance.textGrey,
+            ),
+          ],
+        ),
       ),
     );
   }
