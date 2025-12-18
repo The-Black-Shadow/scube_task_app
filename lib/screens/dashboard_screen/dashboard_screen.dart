@@ -130,8 +130,15 @@ class DashboardScreen extends GetView<DashboardController> {
                                     height: AppSize.height(value: 4),
                                   ),
                                   itemBuilder: (context, index) {
-                                    return DashboardExpandedList(
-                                      item: list[index],
+                                    return GestureDetector(
+                                      onTap: () => Get.toNamed(
+                                        AppRoutes
+                                            .instance
+                                            .listItemDetailsScreen,
+                                      ),
+                                      child: DashboardExpandedList(
+                                        item: list[index],
+                                      ),
                                     );
                                   },
                                 ),

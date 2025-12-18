@@ -35,4 +35,18 @@ class AppStrings {
   final String waterProcess = 'Water Process';
   final String totalPower = 'Total Power';
   final String noDataMessage = 'No data is here,\nplease wait.';
+  // List Item Details
+  final String dataView = 'Data View';
+  final String revenueView = 'Revenue View';
+  final String todayData = 'Today Data';
+  final String customDateData = 'Custom Date Data';
+  final String fromDate = 'From Date';
+  final String toDate = 'To Date';
+  final String energyChart = 'Energy Chart';
+  final String dataAndCostInfo = 'Data & Cost Info';
+  final String dataLabel = 'Data';
+  final String costLabel = 'Cost';
+  final String tkSymbol = '৳';
+  final String kwhSqft = 'kWh/Sqft';
+  final String kw = 'kw';
 }
