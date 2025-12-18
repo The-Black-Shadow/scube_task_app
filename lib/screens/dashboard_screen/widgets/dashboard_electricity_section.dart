@@ -37,6 +37,7 @@ class DashboardElectricitySection extends GetView<DashboardController> {
           }
           final data = controller.dashboardData.value;
           return PowerCircularChart(
+            strokeWidth: AppSize.width(value: 13),
             trackColor: AppColors.instance.chartBlue,
             label: AppStrings.instance.totalPower,
             value: data?.totalPower ?? 0.0,
