@@ -19,6 +19,7 @@ class AppAssertImage {
   final String gGenerator = "assets/generator_8789846.png"; // Reusing
   final String naturalGas = "assets/fire_3900509 1.png";
   final String waterProcess = "assets/faucet_1078798.png";
+  final String charge = "assets/charge_7345374.png";
 
   final String noData = "assets/no_data.png";
   final String chevronsUp = "assets/chevrons-up.png";

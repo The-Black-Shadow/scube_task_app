@@ -236,7 +236,7 @@ class DashboardScreen extends GetView<DashboardController> {
           onTap: () {},
         ),
         DashboardGridItem(
-          iconPath: AppAssertImage.instance.plantSummary,
+          iconPath: AppAssertImage.instance.charge,
           label: AppStrings.instance.plantSummary,
           onTap: () {},
         ),

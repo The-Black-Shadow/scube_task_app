@@ -86,7 +86,7 @@ class AppTextStyles {
   TextStyle get dashboardDataLabel => GoogleFonts.inter(
     fontSize: AppSize.width(value: 12),
     fontWeight: FontWeight.w400,
-    color: AppColors.instance.textGrey,
+    color: AppColors.instance.textDarkBlue,
   );
 
   TextStyle get dashboardDataValue => GoogleFonts.inter(
