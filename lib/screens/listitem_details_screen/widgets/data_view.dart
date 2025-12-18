@@ -86,7 +86,9 @@ class DataView extends GetView<ListItemDetailsController> {
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColors.instance.primaryBlue),
                       borderRadius: BorderRadius.circular(8),
-                      color: AppColors.instance.primaryBlue.withOpacity(0.1),
+                      color: AppColors.instance.primaryBlue.withValues(
+                        alpha: 0.1,
+                      ),
                     ),
                     child: Icon(
                       Icons.search,

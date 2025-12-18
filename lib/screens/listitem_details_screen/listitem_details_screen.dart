@@ -39,7 +39,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black.withValues(alpha: 0.05),
                         blurRadius: 10,
                         offset: const Offset(0, -5),
                       ),
@@ -80,7 +80,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                                 startAngle: isDataView ? 135 : 0,
                                 sweepAngle: isDataView ? 270 : 360,
                                 trackColor: AppColors.instance.chartBlue
-                                    .withOpacity(0.1),
+                                    .withValues(alpha: 0.1),
                                 precision: isDataView ? 2 : 0,
                               );
                             }),
@@ -118,7 +118,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
+                            color: Colors.black.withValues(alpha: 0.05),
                             blurRadius: 5,
                             offset: const Offset(0, 2),
                           ),

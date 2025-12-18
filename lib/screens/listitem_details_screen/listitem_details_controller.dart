@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:scube_task_app/constant/app_strings.dart';
 import 'package:scube_task_app/repositories/dashboard_repository.dart';
@@ -57,7 +58,9 @@ class ListItemDetailsController extends GetxController {
         revenueItems.clear();
       }
     } catch (e) {
-      print('Error fetching details: $e');
+      if (kDebugMode) {
+        print('Error fetching details: $e');
+      }
     } finally {
       isLoading.value = false;
     }

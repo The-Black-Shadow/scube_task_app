@@ -50,7 +50,7 @@ class DetailListItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: AppColors.instance.borderGrey.withOpacity(0.6),
+          color: AppColors.instance.borderGrey.withValues(alpha: 0.6),
         ),
       ),
       child: Row(
@@ -90,7 +90,7 @@ class DetailListItem extends StatelessWidget {
           Container(
             height: 35,
             width: 1,
-            color: AppColors.instance.borderGrey.withOpacity(0.6),
+            color: AppColors.instance.borderGrey.withValues(alpha: 0.6),
             margin: EdgeInsets.symmetric(horizontal: 8),
           ),
           Expanded(
