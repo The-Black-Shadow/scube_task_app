@@ -45,21 +45,22 @@ class LoginScreenController extends GetxController {
     isLoading.value = true;
 
     try {
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
 
       final username = usernameController.text.trim();
       final password = passwordController.text.trim();
 
       if (username.isNotEmpty && password.isNotEmpty) {
-        
         Get.offAllNamed(AppRoutes.instance.dashboardScreen);
         Get.snackbar(
+          duration: const Duration(seconds: 1),
           'Success',
           'Login successful!',
           snackPosition: SnackPosition.BOTTOM,
         );
       } else {
         Get.snackbar(
+          duration: const Duration(seconds: 1),
           'Error',
           AppStrings.instance.invalidCredentials,
           snackPosition: SnackPosition.BOTTOM,
@@ -67,6 +68,7 @@ class LoginScreenController extends GetxController {
       }
     } catch (e) {
       Get.snackbar(
+        duration: const Duration(seconds: 1),
         'Error',
         'An error occurred. Please try again.',
         snackPosition: SnackPosition.BOTTOM,
@@ -78,6 +80,7 @@ class LoginScreenController extends GetxController {
 
   void navigateToForgotPassword() {
     Get.snackbar(
+      duration: const Duration(seconds: 1),
       'Info',
       'Forgot password functionality coming soon!',
       snackPosition: SnackPosition.BOTTOM,
@@ -86,6 +89,7 @@ class LoginScreenController extends GetxController {
 
   void navigateToRegister() {
     Get.snackbar(
+      duration: const Duration(seconds: 1),
       'Info',
       'Register functionality coming soon!',
       snackPosition: SnackPosition.BOTTOM,
