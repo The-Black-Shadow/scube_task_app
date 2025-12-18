@@ -9,8 +9,8 @@ class ListItemDetailsController extends GetxController {
 
   final RxInt dateType = 0.obs;
 
-  final Rx<DateTime> fromDate = DateTime.now().obs;
-  final Rx<DateTime> toDate = DateTime.now().obs;
+  final Rx<DateTime?> fromDate = Rx<DateTime?>(null);
+  final Rx<DateTime?> toDate = Rx<DateTime?>(null);
 
   final RxBool isLoading = true.obs;
 
