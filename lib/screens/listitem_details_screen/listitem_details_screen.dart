@@ -25,17 +25,88 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
       body: Column(
         children: [
           DashboardHeader(title: AppStrings.instance.scmTitle),
-
+          SizedBox(height: AppSize.height(value: 20)),
           Expanded(
-            child: RefreshIndicator(
-              onRefresh: controller.fetchData,
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.all(AppSize.width(value: 20)),
-                child: Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: AppSize.height(value: 25)),
+                  decoration: BoxDecoration(
+                    color: AppColors.instance.white,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 10,
+                        offset: const Offset(0, -5),
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                    child: RefreshIndicator(
+                      onRefresh: controller.fetchData,
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        padding: EdgeInsets.all(AppSize.width(value: 20)),
+                        child: Column(
+                          children: [
+                            SizedBox(height: AppSize.height(value: 35)),
+                            Obx(() {
+                              if (controller.isLoading.value) {
+                                return SkeletonWidget(
+                                  width: AppSize.width(value: 150),
+                                  height: AppSize.width(value: 150),
+                                  borderRadius: BorderRadius.circular(
+                                    AppSize.width(value: 75),
+                                  ),
+                                );
+                              }
+
+                              final isDataView = controller.viewType.value == 0;
+                              return PowerCircularChart(
+                                value: isDataView ? 55.00 : 8897455,
+                                unit: isDataView
+                                    ? AppStrings.instance.kwhSqft
+                                    : 'tk',
+                                label: '',
+                                max: 100,
+                                startAngle: isDataView ? 135 : 0,
+                                sweepAngle: isDataView ? 270 : 360,
+                                trackColor: AppColors.instance.chartBlue
+                                    .withOpacity(0.1),
+                                precision: isDataView ? 2 : 0,
+                              );
+                            }),
+                            SizedBox(height: AppSize.height(value: 24)),
+
+                            Obx(
+                              () => controller.isLoading.value
+                                  ? _buildListSkeleton()
+                                  : (controller.viewType.value == 0
+                                        ? _buildDataView(context)
+                                        : _buildRevenueView(context)),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.9,
                       padding: EdgeInsets.symmetric(
                         vertical: AppSize.height(value: 12),
                         horizontal: AppSize.width(value: 16),
@@ -46,6 +117,13 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                         border: Border.all(
                           color: AppColors.instance.borderGrey,
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: 5,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
                       child: Obx(
                         () => Row(
@@ -65,45 +143,9 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                         ),
                       ),
                     ),
-                    SizedBox(height: AppSize.height(value: 24)),
-
-                    Obx(() {
-                      if (controller.isLoading.value) {
-                        return SkeletonWidget(
-                          width: AppSize.width(value: 150),
-                          height: AppSize.width(value: 150),
-                          borderRadius: BorderRadius.circular(
-                            AppSize.width(value: 75),
-                          ),
-                        );
-                      }
-
-                      final isDataView = controller.viewType.value == 0;
-                      return PowerCircularChart(
-                        value: isDataView ? 55.00 : 8897455,
-                        unit: isDataView ? AppStrings.instance.kwhSqft : 'tk',
-                        label: '',
-                        max: 100,
-                        startAngle: isDataView ? 135 : 0,
-                        sweepAngle: isDataView ? 270 : 360,
-                        trackColor: AppColors.instance.chartBlue.withOpacity(
-                          0.1,
-                        ),
-                        precision: isDataView ? 2 : 0,
-                      );
-                    }),
-                    SizedBox(height: AppSize.height(value: 24)),
-
-                    Obx(
-                      () => controller.isLoading.value
-                          ? _buildListSkeleton()
-                          : (controller.viewType.value == 0
-                                ? _buildDataView(context)
-                                : _buildRevenueView(context)),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ],
@@ -202,42 +244,26 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
           return const SizedBox.shrink();
         }),
 
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.all(AppSize.width(value: 12)),
-          decoration: BoxDecoration(
-            color: AppColors.instance.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.instance.borderGrey),
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppStrings.instance.energyChart,
-                    style: GoogleFonts.inter(
-                      fontSize: AppSize.width(value: 16),
-                      fontWeight: FontWeight.w600,
-                      color: const Color(0xFF1E2843),
-                    ),
-                  ),
-                  Text(
-                    '5.53 ${AppStrings.instance.kw}',
-                    style: GoogleFonts.inter(
-                      fontSize: AppSize.width(value: 28),
-                      fontWeight: FontWeight.w600,
-                      color: const Color(0xFF1E2843),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: AppSize.height(value: 16)),
-              ...controller.dataItems.map((item) => _buildListItem(item, null)),
-            ],
-          ),
+        _buildEnergyChartCard(
+          AppStrings.instance.energyChart,
+          '20.05 ${AppStrings.instance.kw}',
+          controller.dataItems,
         ),
+        Obx(() {
+          if (controller.dateType.value == 1) {
+            return Column(
+              children: [
+                SizedBox(height: AppSize.height(value: 20)),
+                _buildEnergyChartCard(
+                  AppStrings.instance.energyChart,
+                  '5.53 ${AppStrings.instance.kw}',
+                  controller.dataItems,
+                ),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        }),
       ],
     );
   }
@@ -351,6 +377,49 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildEnergyChartCard(
+    String title,
+    String value,
+    List<Map<String, String>> items,
+  ) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(AppSize.width(value: 12)),
+      decoration: BoxDecoration(
+        color: AppColors.instance.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.instance.borderGrey),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.inter(
+                  fontSize: AppSize.width(value: 16),
+                  fontWeight: FontWeight.w600,
+                  color: const Color(0xFF1E2843),
+                ),
+              ),
+              Text(
+                value,
+                style: GoogleFonts.inter(
+                  fontSize: AppSize.width(value: 28),
+                  fontWeight: FontWeight.w600,
+                  color: const Color(0xFF1E2843),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: AppSize.height(value: 16)),
+          ...items.map((item) => _buildListItem(item, null)),
+        ],
       ),
     );
   }
