@@ -5,7 +5,7 @@ A Flutter project for SCube interview task.
 ## Prerequisites
 
 - [Flutter SDK](https://flutter.dev/docs/get-started/install)
-- [FVM (Flutter Version Management)](https://fvm.app/docs/getting_started/installation)
+- [FVM (Flutter Version Management)](https://fvm.app/documentation/getting-started/installation)
 
 ## Installation
 
