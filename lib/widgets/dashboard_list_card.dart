@@ -87,7 +87,7 @@ class DashboardExpandedList extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: AppSize.height(value: 4)),
+                      SizedBox(height: AppSize.height(value: 2)),
                       // Data Row 1
                       Row(
                         children: [

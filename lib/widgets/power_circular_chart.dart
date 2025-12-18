@@ -38,7 +38,7 @@ class PowerCircularChart extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           CustomPaint(
-            size: Size(AppSize.width(value: 140), AppSize.width(value: 140)),
+            size: Size(AppSize.width(value: 120), AppSize.width(value: 120)),
             painter: _PowerCircularChartPainter(
               value: value,
               max: max,

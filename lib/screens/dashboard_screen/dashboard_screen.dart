@@ -60,7 +60,6 @@ class DashboardScreen extends GetView<DashboardController> {
                           ],
                         ),
                       ),
-                      SizedBox(height: AppSize.height(value: 24)),
 
                       const DashboardBottomGrid(),
                       SizedBox(height: AppSize.height(value: 30)),

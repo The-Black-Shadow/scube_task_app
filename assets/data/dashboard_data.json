@@ -28,7 +28,7 @@
             "id": 3,
             "title": "Data Type 3",
             "status": "Inactive",
-            "statusColor": "red",
+            "statusColor": "blue",
             "icon": "power_15679163 1.png",
             "data1Label": "Data 1",
             "data1Value": "55505.63",

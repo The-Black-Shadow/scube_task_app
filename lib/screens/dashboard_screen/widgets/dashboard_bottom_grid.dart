@@ -13,7 +13,7 @@ class DashboardBottomGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.count(
       crossAxisCount: 2,
-      childAspectRatio: 3.0,
+      childAspectRatio: 4.0,
       crossAxisSpacing: AppSize.width(value: 12),
       mainAxisSpacing: AppSize.height(value: 8),
       shrinkWrap: true,

@@ -18,6 +18,7 @@ class DashboardListSection extends GetView<DashboardController> {
           padding: EdgeInsets.symmetric(horizontal: AppSize.width(value: 12)),
           child: Divider(color: AppColors.instance.borderGrey, height: 1),
         ),
+        SizedBox(height: AppSize.height(value: 5)),
 
         Obx(() {
           if (controller.isLoading.value) {
@@ -40,7 +41,7 @@ class DashboardListSection extends GetView<DashboardController> {
           }
           final list = controller.dashboardData.value?.dataList ?? [];
           return SizedBox(
-            height: AppSize.height(value: 300),
+            height: AppSize.height(value: 250),
             child: ListView.separated(
               padding: EdgeInsets.all(AppSize.width(value: 12)),
               itemCount: list.length,

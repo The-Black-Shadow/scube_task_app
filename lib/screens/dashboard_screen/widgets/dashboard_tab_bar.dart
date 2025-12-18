@@ -12,7 +12,7 @@ class DashboardTabBar extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSize.height(value: 40),
+      height: AppSize.height(value: 39),
       decoration: BoxDecoration(
         color: AppColors.instance.white,
         borderRadius: const BorderRadius.only(
@@ -52,7 +52,7 @@ class DashboardTabBar extends GetView<DashboardController> {
               label,
               style: GoogleFonts.inter(
                 fontSize: AppSize.width(value: 14),
-                fontWeight: FontWeight.w400,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                 color: isSelected
                     ? AppColors.instance.white
                     : AppColors.instance.textTab,
