@@ -23,66 +23,76 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
       body: Column(
         children: [
           DashboardHeader(title: AppStrings.instance.scmTitle),
+          DashboardHeader(title: AppStrings.instance.scmTitle),
           Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.all(AppSize.width(value: 20)),
-              child: Column(
-                children: [
-                  // Top View Toggle
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                      vertical: AppSize.height(value: 12),
-                      horizontal: AppSize.width(value: 16),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.instance.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.instance.borderGrey),
-                    ),
-                    child: Obx(
-                      () => Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          CustomRadioButton(
-                            label: AppStrings.instance.dataView,
-                            isSelected: controller.viewType.value == 0,
-                            onTap: () => controller.setViewType(0),
-                          ),
-                          CustomRadioButton(
-                            label: AppStrings.instance.revenueView,
-                            isSelected: controller.viewType.value == 1,
-                            onTap: () => controller.setViewType(1),
-                          ),
-                        ],
+            child: RefreshIndicator(
+              onRefresh: controller.fetchData,
+              child: SingleChildScrollView(
+                physics:
+                    const AlwaysScrollableScrollPhysics(), // Ensure scroll even if content is short
+                padding: EdgeInsets.all(AppSize.width(value: 20)),
+                child: Column(
+                  children: [
+                    // Top View Toggle
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(
+                        vertical: AppSize.height(value: 12),
+                        horizontal: AppSize.width(value: 16),
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.instance.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: AppColors.instance.borderGrey,
+                        ),
+                      ),
+                      child: Obx(
+                        () => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            CustomRadioButton(
+                              label: AppStrings.instance.dataView,
+                              isSelected: controller.viewType.value == 0,
+                              onTap: () => controller.setViewType(0),
+                            ),
+                            CustomRadioButton(
+                              label: AppStrings.instance.revenueView,
+                              isSelected: controller.viewType.value == 1,
+                              onTap: () => controller.setViewType(1),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: AppSize.height(value: 24)),
+                    SizedBox(height: AppSize.height(value: 24)),
 
-                  // Circular Chart
-                  Obx(() {
-                    final isDataView = controller.viewType.value == 0;
-                    return PowerCircularChart(
-                      value: isDataView ? 55.00 : 8897455,
-                      unit: isDataView ? AppStrings.instance.kwhSqft : 'tk',
-                      label: '',
-                      max:
-                          100, // Assuming 100 is max for percentage or similar scaling
-                      startAngle: isDataView ? 135 : 0,
-                      sweepAngle: isDataView ? 270 : 360,
-                      trackColor: AppColors.instance.chartBlue.withOpacity(0.1),
-                      precision: isDataView ? 2 : 0,
-                    );
-                  }),
-                  SizedBox(height: AppSize.height(value: 24)),
+                    // Circular Chart
+                    Obx(() {
+                      final isDataView = controller.viewType.value == 0;
+                      return PowerCircularChart(
+                        value: isDataView ? 55.00 : 8897455,
+                        unit: isDataView ? AppStrings.instance.kwhSqft : 'tk',
+                        label: '',
+                        max:
+                            100, // Assuming 100 is max for percentage or similar scaling
+                        startAngle: isDataView ? 135 : 0,
+                        sweepAngle: isDataView ? 270 : 360,
+                        trackColor: AppColors.instance.chartBlue.withOpacity(
+                          0.1,
+                        ),
+                        precision: isDataView ? 2 : 0,
+                      );
+                    }),
+                    SizedBox(height: AppSize.height(value: 24)),
 
-                  Obx(
-                    () => controller.viewType.value == 0
-                        ? _buildDataView(context)
-                        : _buildRevenueView(context),
-                  ),
-                ],
+                    Obx(
+                      () => controller.viewType.value == 0
+                          ? _buildDataView(context)
+                          : _buildRevenueView(context),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
