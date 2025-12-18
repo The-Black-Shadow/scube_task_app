@@ -24,11 +24,11 @@ class DashboardGridItem extends StatelessWidget {
           color: AppColors.instance.white,
           borderRadius: BorderRadius.circular(AppSize.width(value: 12)),
           border: Border.all(
-            color: AppColors.instance.borderGrey.withOpacity(0.5),
+            color: AppColors.instance.borderGrey.withValues(alpha: 0.5),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),

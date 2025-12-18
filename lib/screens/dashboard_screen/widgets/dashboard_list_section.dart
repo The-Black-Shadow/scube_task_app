@@ -44,7 +44,7 @@ class DashboardListSection extends GetView<DashboardController> {
             child: ListView.separated(
               padding: EdgeInsets.all(AppSize.width(value: 12)),
               itemCount: list.length,
-              separatorBuilder: (_, __) =>
+              separatorBuilder: (_, _) =>
                   SizedBox(height: AppSize.height(value: 4)),
               itemBuilder: (context, index) {
                 return GestureDetector(

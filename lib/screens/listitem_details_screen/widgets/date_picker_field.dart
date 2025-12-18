@@ -22,7 +22,7 @@ class DatePickerField extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColors.instance.textGrey.withOpacity(0.5),
+            color: AppColors.instance.textGrey.withValues(alpha: 0.5),
           ),
           borderRadius: BorderRadius.circular(8),
           color: AppColors.instance.white,
