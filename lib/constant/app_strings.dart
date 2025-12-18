@@ -47,6 +47,7 @@ class AppStrings {
   final String dataLabel = 'Data';
   final String costLabel = 'Cost';
   final String tkSymbol = '৳';
+  final String tk = 'tk';
   final String kwhSqft = 'kWh/Sqft';
   final String kw = 'kw';
 }

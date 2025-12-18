@@ -1,0 +1,30 @@
+{
+    "totalPower": 5.53,
+    "unit": "kw",
+    "detailsList": [
+        {
+            "title": "Data A",
+            "data": "2798.50 (29.53%)",
+            "cost": "35689",
+            "color": "blue"
+        },
+        {
+            "title": "Data B",
+            "data": "72598.50 (35.39%)",
+            "cost": "5259689",
+            "color": "lightBlue"
+        },
+        {
+            "title": "Data C",
+            "data": "6598.36 (83.90%)",
+            "cost": "5698756",
+            "color": "purple"
+        },
+        {
+            "title": "Data D",
+            "data": "6598.26 (36.59%)",
+            "cost": "356987",
+            "color": "orange"
+        }
+    ]
+}

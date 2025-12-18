@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:scube_task_app/constant/app_strings.dart';
-import 'package:scube_task_app/repositories/dashboard_repository.dart';
+import 'package:scube_task_app/repositories/list_item_details_repository.dart';
 
 class ListItemDetailsController extends GetxController {
-  final DashboardRepository _repository = DashboardRepository();
+  final ListItemDetailsRepository _repository = ListItemDetailsRepository();
 
   final RxInt viewType = 0.obs;
 
@@ -33,24 +33,27 @@ class ListItemDetailsController extends GetxController {
   Future<void> fetchData() async {
     isLoading.value = true;
     try {
-      final result = await _repository.fetchDashboardData();
+      final result = await _repository.fetchDetailsData();
 
-      if (result.dataList != null) {
-        dataItems.value = result.dataList!.map((e) {
+      if (result.detailsList != null) {
+        dataItems.value = result.detailsList!.map((e) {
           return {
             'title': e.title ?? 'Unknown',
-            'data': e.data1Value ?? '0',
-            'cost': '${e.data2Value} ${AppStrings.instance.tkSymbol}',
-            'color': e.statusColor ?? '',
+            'data': e.data ?? '0',
+            'cost': '${e.cost} ${AppStrings.instance.tkSymbol}',
+            'color': e.color ?? '',
           };
         }).toList();
 
-        revenueItems.value = result.dataList!.map((e) {
+        // For revenue view, we might want to use the same or different data.
+        // Assuming same structure for now or keeping existing logic if revenue was different.
+        // But the previous code used the same dataList for both.
+        revenueItems.value = result.detailsList!.map((e) {
           return {
             'title': e.title ?? 'Unknown',
-            'data': e.data1Value ?? '0',
-            'cost': '${e.data2Value} ${AppStrings.instance.tkSymbol}',
-            'color': e.statusColor ?? '',
+            'data': e.data ?? '0',
+            'cost': '${e.cost} ${AppStrings.instance.tkSymbol}',
+            'color': e.color ?? '',
           };
         }).toList();
       } else {
