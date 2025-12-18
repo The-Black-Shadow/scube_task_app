@@ -40,6 +40,7 @@ class ListItemDetailsController extends GetxController {
             'title': e.title ?? 'Unknown',
             'data': e.data1Value ?? '0',
             'cost': '${e.data2Value} ${AppStrings.instance.tkSymbol}',
+            'color': e.statusColor ?? '',
           };
         }).toList();
 
@@ -48,6 +49,7 @@ class ListItemDetailsController extends GetxController {
             'title': e.title ?? 'Unknown',
             'data': e.data1Value ?? '0',
             'cost': '${e.data2Value} ${AppStrings.instance.tkSymbol}',
+            'color': e.statusColor ?? '',
           };
         }).toList();
       } else {
