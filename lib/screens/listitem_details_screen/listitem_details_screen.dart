@@ -68,11 +68,27 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                               }
 
                               final isDataView = controller.viewType.value == 0;
+                              final isCustomDate =
+                                  controller.dateType.value == 1;
+
+                              double chartValue;
+                              String chartUnit;
+                              if (isDataView) {
+                                if (isCustomDate) {
+                                  chartValue = 57.00;
+                                  chartUnit = AppStrings.instance.kwhSqft;
+                                } else {
+                                  chartValue = 55.00;
+                                  chartUnit = AppStrings.instance.kwhSqft;
+                                }
+                              } else {
+                                chartValue = 8897455;
+                                chartUnit = AppStrings.instance.tk;
+                              }
+
                               return PowerCircularChart(
-                                value: isDataView ? 55.00 : 8897455,
-                                unit: isDataView
-                                    ? AppStrings.instance.kwhSqft
-                                    : AppStrings.instance.tk,
+                                value: chartValue,
+                                unit: chartUnit,
                                 label: '',
                                 max: 100,
                                 startAngle: isDataView ? 135 : 0,
