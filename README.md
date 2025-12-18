@@ -34,3 +34,18 @@ To run the app using FVM:
 ```bash
 fvm flutter run
 ```
+
+## Screenshots
+
+<p float="left">
+  <img src="assets/demo/1.jpg" width="200" />
+  <img src="assets/demo/2.jpg" width="200" /> 
+  <img src="assets/demo/3.jpg" width="200" />
+</p>
+
+<p float="left">
+  <img src="assets/demo/4.jpg" width="200" />
+  <img src="assets/demo/5.jpg" width="200" />
+  <img src="assets/demo/6.jpg" width="200" />
+  <img src="assets/demo/7.jpg" width="200" />
+</p>
