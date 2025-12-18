@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:scube_task_app/constant/app_colors.dart';
-import 'package:scube_task_app/constant/app_strings.dart';
 import 'package:scube_task_app/constant/app_text_styles.dart';
 import 'package:scube_task_app/utils/app_size.dart';
 
 class PowerCircularChart extends StatelessWidget {
   final double value;
   final String unit;
+  final String? label;
 
   const PowerCircularChart({
     super.key,
     required this.value,
     required this.unit,
+    this.label,
   });
 
   @override
@@ -57,10 +58,8 @@ class PowerCircularChart extends StatelessWidget {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                AppStrings.instance.totalPower,
-                style: AppTextStyles.instance.dashboardDataLabel,
-              ),
+              if (label != null) // Only show if label is provided
+                Text(label!, style: AppTextStyles.instance.dashboardDataLabel),
               SizedBox(height: 4),
               Row(
                 mainAxisSize: MainAxisSize.min,

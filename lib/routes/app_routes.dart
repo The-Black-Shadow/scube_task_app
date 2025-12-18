@@ -6,4 +6,5 @@ class AppRoutes {
   final String loginScreen = "/loginScreen";
   final String dashboardScreen = "/dashboardScreen";
   final String gridDetailsScreen = '/gridDetailsScreen';
+  final String listItemDetailsScreen = '/listItemDetailsScreen';
 }
