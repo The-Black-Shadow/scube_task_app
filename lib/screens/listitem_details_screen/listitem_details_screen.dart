@@ -23,7 +23,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
       body: Column(
         children: [
           DashboardHeader(title: AppStrings.instance.scmTitle),
-          DashboardHeader(title: AppStrings.instance.scmTitle),
+
           Expanded(
             child: RefreshIndicator(
               onRefresh: controller.fetchData,
