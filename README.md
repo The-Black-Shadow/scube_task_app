@@ -1,16 +1,36 @@
-# scube_task_app
+# SCube Task App
 
-A new Flutter project.
+A Flutter project for SCube interview task.
 
-## Getting Started
+## Prerequisites
 
-This project is a starting point for a Flutter application.
+- [Flutter SDK](https://flutter.dev/docs/get-started/install)
+- [FVM (Flutter Version Management)](https://fvm.app/docs/getting_started/installation)
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. **Install FVM** (if not already installed):
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   ```bash
+   dart pub global activate fvm
+   ```
+
+2. **Select Flutter Version**:
+
+   ```bash
+   fvm use
+   ```
+
+3. **Install Dependencies**:
+
+   ```bash
+   fvm flutter pub get
+   ```
+
+## Running the App
+
+To run the app using FVM:
+
+```bash
+fvm flutter run
+```
