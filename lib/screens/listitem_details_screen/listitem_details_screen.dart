@@ -27,90 +27,96 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
             child: Stack(
               clipBehavior: Clip.none,
               children: [
-                Container(
-                  margin: EdgeInsets.only(top: AppSize.height(value: 25)),
-                  decoration: BoxDecoration(
-                    color: AppColors.instance.white,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, -5),
+                Positioned(
+                  top: AppSize.height(value: 25),
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.instance.white,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
                       ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, -5),
+                        ),
+                      ],
                     ),
-                    child: RefreshIndicator(
-                      onRefresh: controller.fetchData,
-                      child: SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        padding: EdgeInsets.all(AppSize.width(value: 20)),
-                        child: Column(
-                          children: [
-                            SizedBox(height: AppSize.height(value: 35)),
-                            Obx(() {
-                              if (controller.isLoading.value) {
-                                return SkeletonWidget(
-                                  width: AppSize.width(value: 150),
-                                  height: AppSize.width(value: 150),
-                                  borderRadius: BorderRadius.circular(
-                                    AppSize.width(value: 75),
-                                  ),
-                                );
-                              }
-
-                              final isDataView = controller.viewType.value == 0;
-                              final isCustomDate =
-                                  controller.dateType.value == 1;
-
-                              double chartValue;
-                              String chartUnit;
-                              if (isDataView) {
-                                if (isCustomDate) {
-                                  chartValue = 57.00;
-                                  chartUnit = AppStrings.instance.kwhSqft;
-                                } else {
-                                  chartValue = 55.00;
-                                  chartUnit = AppStrings.instance.kwhSqft;
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                      child: RefreshIndicator(
+                        onRefresh: controller.fetchData,
+                        child: SingleChildScrollView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          padding: EdgeInsets.all(AppSize.width(value: 20)),
+                          child: Column(
+                            children: [
+                              SizedBox(height: AppSize.height(value: 35)),
+                              Obx(() {
+                                if (controller.isLoading.value) {
+                                  return SkeletonWidget(
+                                    width: AppSize.width(value: 150),
+                                    height: AppSize.width(value: 150),
+                                    borderRadius: BorderRadius.circular(
+                                      AppSize.width(value: 75),
+                                    ),
+                                  );
                                 }
-                              } else {
-                                chartValue = 8897455;
-                                chartUnit = AppStrings.instance.tk;
-                              }
 
-                              return PowerCircularChart(
-                                value: chartValue,
-                                unit: chartUnit,
-                                label: '',
-                                max: isDataView ? 100 : 11000000,
-                                startAngle: isDataView ? 135 : 135,
-                                sweepAngle: isDataView ? 270 : 270,
-                                trackColor: AppColors.instance.chartBlue
-                                    .withValues(alpha: 0.1),
-                                precision: isDataView ? 2 : 0,
-                                strokeWidth: AppSize.width(value: 13),
-                                color: AppColors.instance.primaryBlue,
-                                unitOnNewLine: true,
-                              );
-                            }),
-                            SizedBox(height: AppSize.height(value: 24)),
+                                final isDataView =
+                                    controller.viewType.value == 0;
+                                final isCustomDate =
+                                    controller.dateType.value == 1;
 
-                            Obx(
-                              () => controller.isLoading.value
-                                  ? const ListViewSkeleton()
-                                  : (controller.viewType.value == 0
-                                        ? const DataView()
-                                        : const RevenueView()),
-                            ),
-                          ],
+                                double chartValue;
+                                String chartUnit;
+                                if (isDataView) {
+                                  if (isCustomDate) {
+                                    chartValue = 57.00;
+                                    chartUnit = AppStrings.instance.kwhSqft;
+                                  } else {
+                                    chartValue = 55.00;
+                                    chartUnit = AppStrings.instance.kwhSqft;
+                                  }
+                                } else {
+                                  chartValue = 8897455;
+                                  chartUnit = AppStrings.instance.tk;
+                                }
+
+                                return PowerCircularChart(
+                                  value: chartValue,
+                                  unit: chartUnit,
+                                  label: '',
+                                  max: isDataView ? 100 : 11000000,
+                                  startAngle: isDataView ? 135 : 135,
+                                  sweepAngle: isDataView ? 270 : 270,
+                                  trackColor: AppColors.instance.chartBlue
+                                      .withValues(alpha: 0.1),
+                                  precision: isDataView ? 2 : 0,
+                                  strokeWidth: AppSize.width(value: 13),
+                                  color: AppColors.instance.primaryBlue,
+                                  unitOnNewLine: true,
+                                );
+                              }),
+                              SizedBox(height: AppSize.height(value: 24)),
+
+                              Obx(
+                                () => controller.isLoading.value
+                                    ? const ListViewSkeleton()
+                                    : (controller.viewType.value == 0
+                                          ? const DataView()
+                                          : const RevenueView()),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
