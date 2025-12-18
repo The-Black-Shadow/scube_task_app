@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scube_task_app/constant/app_assert_image.dart';
 import 'package:scube_task_app/constant/app_colors.dart';
@@ -19,53 +20,62 @@ class DashboardHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppSize.width(value: 20),
-        vertical: AppSize.height(value: 16),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: AppColors.instance.white,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
       ),
-      color: AppColors.instance.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Back Button
-          GestureDetector(
-            onTap: onBackPressed ?? () => Get.back(),
-            child: Icon(
-              Icons.arrow_back,
-              color: AppColors.instance.textDark,
-              size: AppSize.width(value: 24),
+      child: Container(
+        padding: EdgeInsets.fromLTRB(
+          AppSize.width(value: 20),
+          MediaQuery.of(context).padding.top + AppSize.height(value: 16),
+          AppSize.width(value: 20),
+          AppSize.height(value: 16),
+        ),
+        color: AppColors.instance.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Back Button
+            GestureDetector(
+              onTap: onBackPressed ?? () => Get.back(),
+              child: Icon(
+                Icons.arrow_back,
+                color: AppColors.instance.textDark,
+                size: AppSize.width(value: 24),
+              ),
             ),
-          ),
 
-          // Title
-          Text(title, style: AppTextStyles.instance.dashboardHeaderTitle),
+            // Title
+            Text(title, style: AppTextStyles.instance.dashboardHeaderTitle),
 
-          // Notification Icon
-          GestureDetector(
-            onTap: onNotificationPressed,
-            child: Stack(
-              children: [
-                Image.asset(
-                  AppAssertImage.instance.bell,
-                  width: AppSize.width(value: 20),
-                  height: AppSize.width(value: 20),
-                ),
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
+            // Notification Icon
+            GestureDetector(
+              onTap: onNotificationPressed,
+              child: Stack(
+                children: [
+                  Image.asset(
+                    AppAssertImage.instance.bell,
+                    width: AppSize.width(value: 20),
+                    height: AppSize.width(value: 20),
+                  ),
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
