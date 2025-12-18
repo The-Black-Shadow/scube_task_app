@@ -11,6 +11,7 @@ import 'package:scube_task_app/utils/app_size.dart';
 import 'package:scube_task_app/widgets/custom_radio_button.dart';
 import 'package:scube_task_app/widgets/dashboard_header.dart';
 import 'package:scube_task_app/widgets/power_circular_chart.dart';
+import 'package:scube_task_app/widgets/skeleton_widget.dart';
 
 class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
   const ListItemDetailsScreen({super.key});
@@ -30,11 +31,11 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
               onRefresh: controller.fetchData,
               child: SingleChildScrollView(
                 physics:
-                    const AlwaysScrollableScrollPhysics(), // Ensure scroll even if content is short
+                    const AlwaysScrollableScrollPhysics(), 
                 padding: EdgeInsets.all(AppSize.width(value: 20)),
                 child: Column(
                   children: [
-                    // Top View Toggle
+                    
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.symmetric(
@@ -68,15 +69,23 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                     ),
                     SizedBox(height: AppSize.height(value: 24)),
 
-                    // Circular Chart
+                    
                     Obx(() {
+                      if (controller.isLoading.value) {
+                        return SkeletonWidget(
+                          width: AppSize.width(value: 180),
+                          height: AppSize.width(value: 180),
+                          borderRadius: BorderRadius.circular(90),
+                        );
+                      }
+
                       final isDataView = controller.viewType.value == 0;
                       return PowerCircularChart(
                         value: isDataView ? 55.00 : 8897455,
                         unit: isDataView ? AppStrings.instance.kwhSqft : 'tk',
                         label: '',
                         max:
-                            100, // Assuming 100 is max for percentage or similar scaling
+                            100, 
                         startAngle: isDataView ? 135 : 0,
                         sweepAngle: isDataView ? 270 : 360,
                         trackColor: AppColors.instance.chartBlue.withOpacity(
@@ -88,9 +97,11 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                     SizedBox(height: AppSize.height(value: 24)),
 
                     Obx(
-                      () => controller.viewType.value == 0
-                          ? _buildDataView(context)
-                          : _buildRevenueView(context),
+                      () => controller.isLoading.value
+                          ? _buildListSkeleton()
+                          : (controller.viewType.value == 0
+                                ? _buildDataView(context)
+                                : _buildRevenueView(context)),
                     ),
                   ],
                 ),
@@ -105,7 +116,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
   Widget _buildDataView(BuildContext context) {
     return Column(
       children: [
-        // Date Toggle
+        
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -169,7 +180,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
           return const SizedBox.shrink();
         }),
 
-        // Data Card
+        
         Container(
           width: double.infinity,
           padding: EdgeInsets.all(AppSize.width(value: 12)),
@@ -418,6 +429,33 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildListSkeleton() {
+    return Column(
+      children: [
+        
+        SkeletonWidget(
+          width: double.infinity,
+          height: AppSize.height(value: 50),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        SizedBox(height: AppSize.height(value: 12)),
+
+        
+        ...List.generate(
+          4,
+          (index) => Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: SkeletonWidget(
+              width: double.infinity,
+              height: AppSize.height(value: 80),
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
