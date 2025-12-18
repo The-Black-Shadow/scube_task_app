@@ -40,26 +40,26 @@ class AppTextField extends StatelessWidget {
         filled: true,
         fillColor: AppColors.instance.white,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.width(value: 8)),
+          borderRadius: BorderRadius.circular(AppSize.width(value: 10)),
           borderSide: BorderSide(color: AppColors.instance.borderGrey),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.width(value: 8)),
+          borderRadius: BorderRadius.circular(AppSize.width(value: 10)),
           borderSide: BorderSide(color: AppColors.instance.borderGrey),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.width(value: 8)),
+          borderRadius: BorderRadius.circular(AppSize.width(value: 10)),
           borderSide: BorderSide(
             color: AppColors.instance.primaryBlue,
             width: 2,
           ),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.width(value: 8)),
+          borderRadius: BorderRadius.circular(AppSize.width(value: 10)),
           borderSide: const BorderSide(color: Colors.red),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.width(value: 8)),
+          borderRadius: BorderRadius.circular(AppSize.width(value: 10)),
           borderSide: const BorderSide(color: Colors.red, width: 2),
         ),
       ),
