@@ -22,7 +22,7 @@ class DashboardGridItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.instance.white,
-          borderRadius: BorderRadius.circular(AppSize.width(value: 12)),
+          borderRadius: BorderRadius.circular(AppSize.width(value: 8)),
           border: Border.all(
             color: AppColors.instance.borderGrey.withValues(alpha: 0.5),
           ),
