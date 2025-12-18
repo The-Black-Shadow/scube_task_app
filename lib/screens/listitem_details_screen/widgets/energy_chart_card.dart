@@ -28,26 +28,31 @@ class EnergyChartCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: GoogleFonts.inter(
-                  fontSize: AppSize.width(value: 16),
-                  fontWeight: FontWeight.w600,
-                  color: const Color(0xFF1E2843),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSize.height(value: 12),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.inter(
+                    fontSize: AppSize.width(value: 14),
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF1E2843),
+                  ),
                 ),
-              ),
-              Text(
-                value,
-                style: GoogleFonts.inter(
-                  fontSize: AppSize.width(value: 28),
-                  fontWeight: FontWeight.w600,
-                  color: const Color(0xFF1E2843),
+                Text(
+                  value,
+                  style: GoogleFonts.inter(
+                    fontSize: AppSize.width(value: 28),
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF1E2843),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           SizedBox(height: AppSize.height(value: 16)),
           ...items.asMap().entries.map(

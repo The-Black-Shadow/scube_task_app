@@ -72,7 +72,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                                 value: isDataView ? 55.00 : 8897455,
                                 unit: isDataView
                                     ? AppStrings.instance.kwhSqft
-                                    : 'tk',
+                                    : AppStrings.instance.tk,
                                 label: '',
                                 max: 100,
                                 startAngle: isDataView ? 135 : 0,
@@ -80,6 +80,9 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                                 trackColor: AppColors.instance.chartBlue
                                     .withValues(alpha: 0.1),
                                 precision: isDataView ? 2 : 0,
+                                strokeWidth: AppSize.width(value: 12),
+                                color: AppColors.instance.primaryBlue,
+                                unitOnNewLine: true,
                               );
                             }),
                             SizedBox(height: AppSize.height(value: 24)),

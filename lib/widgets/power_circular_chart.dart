@@ -15,6 +15,8 @@ class PowerCircularChart extends StatelessWidget {
   final Color? color;
   final Color? trackColor;
   final int precision;
+  final double? strokeWidth;
+  final bool unitOnNewLine;
 
   const PowerCircularChart({
     super.key,
@@ -27,6 +29,8 @@ class PowerCircularChart extends StatelessWidget {
     this.color,
     this.trackColor,
     this.precision = 2,
+    this.strokeWidth,
+    this.unitOnNewLine = false,
   });
 
   @override
@@ -46,6 +50,7 @@ class PowerCircularChart extends StatelessWidget {
               sweepAngle: sweepAngle,
               color: color ?? AppColors.instance.chartBlue,
               trackColor: trackColor ?? AppColors.instance.white,
+              strokeWidth: strokeWidth ?? AppSize.width(value: 20),
             ),
           ),
           // Center Text
@@ -54,20 +59,31 @@ class PowerCircularChart extends StatelessWidget {
             children: [
               if (label != null) // Only show if label is provided
                 Text(label!, style: AppTextStyles.instance.dashboardDataLabel),
-              const SizedBox(height: 4),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    value.toStringAsFixed(precision),
-                    style: AppTextStyles.instance.powerValue,
-                  ),
-                  const SizedBox(width: 2),
-                  Text(unit, style: AppTextStyles.instance.powerUnit),
-                ],
-              ),
+              if (unitOnNewLine)
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      value.toStringAsFixed(precision),
+                      style: AppTextStyles.instance.powerValue,
+                    ),
+                    Text(unit, style: AppTextStyles.instance.powerUnit),
+                  ],
+                )
+              else
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    Text(
+                      value.toStringAsFixed(precision),
+                      style: AppTextStyles.instance.powerValue,
+                    ),
+                    const SizedBox(width: 2),
+                    Text(unit, style: AppTextStyles.instance.powerUnit),
+                  ],
+                ),
             ],
           ),
         ],
@@ -83,6 +99,7 @@ class _PowerCircularChartPainter extends CustomPainter {
   final double sweepAngle;
   final Color color;
   final Color trackColor;
+  final double strokeWidth;
 
   _PowerCircularChartPainter({
     required this.value,
@@ -91,6 +108,7 @@ class _PowerCircularChartPainter extends CustomPainter {
     required this.sweepAngle,
     required this.color,
     required this.trackColor,
+    required this.strokeWidth,
   });
 
   @override
@@ -99,7 +117,7 @@ class _PowerCircularChartPainter extends CustomPainter {
     final radius = (size.width / 2);
 
     // Stroke width
-    final strokeWidth = AppSize.width(value: 20);
+    final strokeWidth = this.strokeWidth;
 
     final trackPaint = Paint()
       ..color = trackColor
@@ -147,6 +165,7 @@ class _PowerCircularChartPainter extends CustomPainter {
         oldDelegate.startAngle != startAngle ||
         oldDelegate.sweepAngle != sweepAngle ||
         oldDelegate.color != color ||
-        oldDelegate.trackColor != trackColor;
+        oldDelegate.trackColor != trackColor ||
+        oldDelegate.strokeWidth != strokeWidth;
   }
 }
