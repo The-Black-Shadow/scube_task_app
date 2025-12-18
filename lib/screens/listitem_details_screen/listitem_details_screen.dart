@@ -209,9 +209,7 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                 ],
               ),
               SizedBox(height: AppSize.height(value: 16)),
-              ...controller.dataItems.map(
-                (item) => _buildListItem(item, Colors.blue),
-              ),
+              ...controller.dataItems.map((item) => _buildListItem(item, null)),
             ],
           ),
         ),
@@ -326,8 +324,28 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
       Colors.purple,
       Colors.orange,
     ];
+
+    Color? parsedColor;
+    if (item['color'] != null && item['color']!.isNotEmpty) {
+      switch (item['color']!.toLowerCase()) {
+        case 'blue':
+          parsedColor = AppColors.instance.activeBlue;
+          break;
+        case 'orange':
+          parsedColor = AppColors.instance.statusOrange;
+          break;
+        case 'red':
+          parsedColor = AppColors.instance.inactiveRed;
+          break;
+        default:
+          parsedColor = null;
+      }
+    }
+
     final color =
-        dotColor ?? colors[controller.dataItems.indexOf(item) % colors.length];
+        dotColor ??
+        parsedColor ??
+        colors[controller.dataItems.indexOf(item) % colors.length];
 
     return Container(
       margin: EdgeInsets.only(bottom: 8),
@@ -340,29 +358,36 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
       ),
       child: Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
+          SizedBox(
+            width: AppSize.width(value: 80),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
+                    ),
                   ),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  item['title'] ?? '',
-                  style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 13,
-                    color: const Color(0xFF1E2843),
+                  SizedBox(height: 4),
+                  Text(
+                    item['title'] ?? '',
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13,
+                      color: const Color(0xFF1E2843),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Container(
