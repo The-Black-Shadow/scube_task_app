@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:scube_task_app/constant/app_assert_image.dart';
 import 'package:scube_task_app/constant/app_colors.dart';
 import 'package:scube_task_app/constant/app_strings.dart';
 
@@ -240,27 +241,45 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                     ),
                   ],
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.instance.primaryBlue,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.keyboard_arrow_up,
-                    color: Colors.white,
-                    size: 20,
+                Obx(
+                  () => GestureDetector(
+                    onTap: controller.toggleRevenueExpanded,
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: AppColors.instance.primaryBlue,
+                        shape: BoxShape.circle,
+                      ),
+                      child: AnimatedRotation(
+                        turns: controller.isRevenueExpanded.value ? 0 : 0.5,
+                        duration: const Duration(milliseconds: 300),
+                        child: Image.asset(
+                          AppAssertImage.instance.chevronsUp,
+                          width: 20,
+                          height: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
           Divider(color: AppColors.instance.borderGrey, height: 1),
-          Padding(
-            padding: EdgeInsets.all(AppSize.width(value: 12)),
-            child: Column(
-              children: controller.revenueItems
-                  .map((item) => _buildListItem(item, null))
-                  .toList(),
+          Obx(
+            () => AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              child: controller.isRevenueExpanded.value
+                  ? Padding(
+                      padding: EdgeInsets.all(AppSize.width(value: 12)),
+                      child: Column(
+                        children: controller.revenueItems
+                            .map((item) => _buildListItem(item, null))
+                            .toList(),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
             ),
           ),
         ],

@@ -17,10 +17,16 @@ class ListItemDetailsController extends GetxController {
   final RxList<Map<String, String>> dataItems = <Map<String, String>>[].obs;
   final RxList<Map<String, String>> revenueItems = <Map<String, String>>[].obs;
 
+  final RxBool isRevenueExpanded = true.obs;
+
   @override
   void onInit() {
     super.onInit();
     fetchData();
+  }
+
+  void toggleRevenueExpanded() {
+    isRevenueExpanded.value = !isRevenueExpanded.value;
   }
 
   Future<void> fetchData() async {
