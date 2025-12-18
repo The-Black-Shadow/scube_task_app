@@ -90,13 +90,13 @@ class ListItemDetailsScreen extends GetView<ListItemDetailsController> {
                                 value: chartValue,
                                 unit: chartUnit,
                                 label: '',
-                                max: 100,
-                                startAngle: isDataView ? 135 : 0,
-                                sweepAngle: isDataView ? 270 : 360,
+                                max: isDataView ? 100 : 11000000,
+                                startAngle: isDataView ? 135 : 135,
+                                sweepAngle: isDataView ? 270 : 270,
                                 trackColor: AppColors.instance.chartBlue
                                     .withValues(alpha: 0.1),
                                 precision: isDataView ? 2 : 0,
-                                strokeWidth: AppSize.width(value: 12),
+                                strokeWidth: AppSize.width(value: 13),
                                 color: AppColors.instance.primaryBlue,
                                 unitOnNewLine: true,
                               );

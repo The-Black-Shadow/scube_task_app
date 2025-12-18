@@ -103,7 +103,7 @@ class AppTextStyles {
 
   TextStyle get powerUnit => GoogleFonts.inter(
     fontSize: AppSize.width(value: 14),
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
     color: AppColors.instance.textDark,
   );
 
