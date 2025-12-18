@@ -14,6 +14,7 @@ class PowerCircularChart extends StatelessWidget {
   final double sweepAngle;
   final Color? color;
   final Color? trackColor;
+  final int precision;
 
   const PowerCircularChart({
     super.key,
@@ -25,6 +26,7 @@ class PowerCircularChart extends StatelessWidget {
     this.sweepAngle = 360,
     this.color,
     this.trackColor,
+    this.precision = 2,
   });
 
   @override
@@ -59,7 +61,7 @@ class PowerCircularChart extends StatelessWidget {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
-                    value.toStringAsFixed(2),
+                    value.toStringAsFixed(precision),
                     style: AppTextStyles.instance.powerValue,
                   ),
                   const SizedBox(width: 2),
